@@ -11,8 +11,8 @@ public class PlayerLook : MonoBehaviour
 
     private Vector3 headRotation;
 
-    [SerializeField] private float lookXSensitivity = 0.5f;
-    [SerializeField] private float lookYSensitivity = 0.5f;
+    [SerializeField] private float lookXSensitivity = 0.4f;
+    [SerializeField] private float lookYSensitivity = 0.4f;
     private float lookYCapMin = -70f;
     private float lookYCapMax = 80f;
 
