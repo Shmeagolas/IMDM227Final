@@ -12,6 +12,8 @@ public class LightDetection : MonoBehaviour
     public int width = 640;
     public int height = 360;
 
+    public float threshhold = 9E+07f;
+
     Color32[] pixels;
 
     WebCamTexture cam;
@@ -63,7 +65,7 @@ public class LightDetection : MonoBehaviour
                 total += c.b;
                 total += c.g;
             }
-            if (total > 9E+07) {
+            if (total > threshhold) {
                 Debug.Log("the light is on: " + total);
             } else {
                 Debug.Log("the light is off: " + total);
