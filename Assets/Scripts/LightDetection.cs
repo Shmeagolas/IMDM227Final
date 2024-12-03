@@ -13,11 +13,15 @@ public class LightDetection : MonoBehaviour
     public int height = 360;
 
     public float threshhold = 9E+07f;
+    public Material lightSky;
+    public Material darkSky;
 
     Color32[] pixels;
 
     WebCamTexture cam;
     Texture2D tex;
+
+    public GameObject battery;
 
     Action update = () => { };
     void Start()
@@ -67,8 +71,11 @@ public class LightDetection : MonoBehaviour
             }
             if (total > threshhold) {
                 Debug.Log("the light is on: " + total);
+                RenderSettings.skybox = lightSky;
+                battery.GetComponent<DrainBattery>().Drain(0.05f);
             } else {
                 Debug.Log("the light is off: " + total);
+                RenderSettings.skybox = darkSky;
             }
 
             tex.SetPixels32(pixels);

@@ -8,6 +8,7 @@ public class DrainBattery : MonoBehaviour
     public Slider battery; // Reference to the Slider
     float maxCharge = 100f; // Maximum charge (100%)
     private float currentCharge;
+    bool dead = false;
     
     // Start is called before the first frame update
     void Start()
@@ -28,9 +29,21 @@ public class DrainBattery : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // REMOVE
-        currentCharge -= 0.01f; //test that it works
-        // ^^^^^^
-        battery.value = currentCharge;
+        // only update the value if there is still charge left
+        if (!dead) {
+            // REMOVE
+            // currentCharge -= 0.01f; //test that it works
+            // currentCharge = Mathf.Clamp(currentCharge, 0, maxCharge);
+            // ^^^^^^
+
+            battery.value = currentCharge; // update the slider
+            
+            // if the charge is all gone, battery is dead
+            if (currentCharge <= 0) {
+                dead = true;
+            }
+        } else {
+            // Debug.Log("GAME OVER: battery is dead");
+        }
     }
 }
