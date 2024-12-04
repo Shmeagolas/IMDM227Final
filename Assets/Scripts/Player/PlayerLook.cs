@@ -26,6 +26,8 @@ public class PlayerLook : MonoBehaviour
         playerInput.Enable();
 
         headRotation = this.transform.localRotation.eulerAngles;
+        // make mouse invisible
+        Cursor.visible = false;
     }
 
     void Update()
