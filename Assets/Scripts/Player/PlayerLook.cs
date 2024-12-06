@@ -21,10 +21,11 @@ public class PlayerLook : MonoBehaviour
         lookYCapMax = 80f;
 
     //firing vars
-    private float firingDelay = 1f, //seconds
+    private float firingDelay = .2f, //seconds
         nextFireTime = -1f,
         rayCastMaxDistance = 1000f;
     int layerMask = 1 << 9;//blastable layer
+    [SerializeField] private BlasterRecoil blaster;
 
     private void Awake()
     {
@@ -45,8 +46,11 @@ public class PlayerLook : MonoBehaviour
         // make mouse invisible
         Cursor.visible = false;
 
-        lookXSensitivity = lookSensitivity;
-        lookYSensitivity = lookSensitivity;
+        if(lookSensitivity != 0)
+        {
+            lookXSensitivity = lookSensitivity;
+            lookYSensitivity = lookSensitivity;
+        }
     }
 
     void Update()
@@ -91,6 +95,8 @@ public class PlayerLook : MonoBehaviour
     // reset fire cooldown 
     nextFireTime = Time.time + firingDelay;
 
+    blaster.doRecoil();
+
     RaycastHit blasted;
 
     //fire raycast from transform position to find object on layer 9: "blasted"
@@ -98,6 +104,8 @@ public class PlayerLook : MonoBehaviour
     {
         //print the name of object (debugging only)
         Debug.Log($"Hit object: {blasted.collider.gameObject.name}");
+
+        
     }
 }
 

@@ -2287,6 +2287,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7563282154325101080, guid: 715b02eed653af145ad33f39c7f278ac, type: 3}
+      propertyPath: lookSensitivity
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563282154325101080, guid: 715b02eed653af145ad33f39c7f278ac, type: 3}
       propertyPath: lookXSensitivity
       value: 0.2
       objectReference: {fileID: 0}
