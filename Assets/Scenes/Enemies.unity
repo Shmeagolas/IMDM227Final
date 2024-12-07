@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15dfd73ad56494e7f860d3a12c95cc6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 2042562988859970541, guid: f5e5007d1c87d46d0876e484e72babd5, type: 3}
+  enemy: {fileID: 5235374609312693355, guid: e4dd6d6b2a26a4cae8293d390cb06585, type: 3}
   plane: {fileID: 217027737}
   spawnDuration: 5
   spawnInterval: 0.5
