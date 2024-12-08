@@ -9,11 +9,18 @@ public class DrainBattery : MonoBehaviour
     float maxCharge = 100f; // Maximum charge (100%)
     private float currentCharge;
     bool dead = false;
+    public GameObject gameOverUI;
     
     // Start is called before the first frame update
     void Start()
     {
         currentCharge = maxCharge; // start with battery at full
+        Update();
+    }
+
+    public void Reset() {
+        dead = false;
+        currentCharge = 100; // start with battery at full
         Update();
     }
 
@@ -43,6 +50,10 @@ public class DrainBattery : MonoBehaviour
                 dead = true;
             }
         } else {
+            Debug.Log("gameover");
+            dead = false;
+            gameOverUI.GetComponent<GameOver>().ShowGameOver();
+            
             // Debug.Log("GAME OVER: battery is dead");
         }
     }
