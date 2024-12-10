@@ -18,7 +18,8 @@ public class PlayerLook : MonoBehaviour
     private float lookXSensitivity = 0.4f,
         lookYSensitivity = 0.4f,
         lookYCapMin = -70f,
-        lookYCapMax = 80f;
+        lookYCapMax = 80f,
+        lookXCapMax = 60f;
 
     //firing vars
     private float firingDelay = .2f, //seconds
@@ -75,11 +76,14 @@ public class PlayerLook : MonoBehaviour
         
         //keeps x rotation value between min cap and max cap
         headRotation.x = Mathf.Clamp(headRotation.x, lookYCapMin, lookYCapMax);
+
+        
         
         //this is value would also typically control the whole character's rotation
         //however our character is stationary so I'm only rotating the "head"
         headRotation.y += lookXSensitivity * inputLook.x;
         
+        headRotation.y = Mathf.Clamp(headRotation.y, -1f * lookXCapMax, lookXCapMax);
 
         this.transform.localRotation = Quaternion.Euler(headRotation);
     }
