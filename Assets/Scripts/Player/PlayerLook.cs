@@ -27,6 +27,12 @@ public class PlayerLook : MonoBehaviour
     int layerMask = 1 << 9;//blastable layer
     [SerializeField] private BlasterRecoil blaster;
 
+    // Laser vars
+    [SerializeField] private Laser laser; 
+    [SerializeField] private LineRenderer laserRenderer; 
+    [SerializeField] private Transform laserStartPoint;
+    private float laserDuration = 0.1f; 
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -51,6 +57,8 @@ public class PlayerLook : MonoBehaviour
             lookXSensitivity = lookSensitivity;
             lookYSensitivity = lookSensitivity;
         }
+
+        laser.Initialize(laserRenderer);
     }
 
     void Update()
@@ -99,13 +107,18 @@ public class PlayerLook : MonoBehaviour
 
     RaycastHit blasted;
 
-    //fire raycast from transform position to find object on layer 9: "blasted"
-    if (Physics.Raycast(transform.position, transform.forward, out blasted, rayCastMaxDistance, layerMask))
+        if (Physics.Raycast(transform.position, transform.forward, out blasted, rayCastMaxDistance, layerMask))
     {
-        //print the name of object (debugging only)
         Debug.Log($"Hit object: {blasted.collider.gameObject.name}");
 
-        
+        // Draw the laser to the hit point
+        laser.DrawLaser(blasted.point, laserDuration);
+    }
+    else
+    {
+        // If no hit, draw laser to maximum distance
+        Vector3 laserEndPoint = transform.position + transform.forward * rayCastMaxDistance;
+        laser.DrawLaser(laserEndPoint, laserDuration);
     }
 }
 

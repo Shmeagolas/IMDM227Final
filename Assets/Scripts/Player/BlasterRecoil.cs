@@ -8,6 +8,7 @@ public class BlasterRecoil : MonoBehaviour
     private Quaternion baseRotation;
     private Vector3 midAnimationPosition;
     private Quaternion midAnimationRotation;
+    [SerializeField] private object laser;
     [SerializeField] private float maxAngle, recoilAngle, maxBack, recoilBack, recoilSpeed, resetSpeed;
     private float angleRange = .5f, backRange = .5f;
 
