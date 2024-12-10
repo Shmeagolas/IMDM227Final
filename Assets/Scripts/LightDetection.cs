@@ -2,12 +2,14 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LightDetection : MonoBehaviour
 {
-    
-    // public Transform ball;
     const int waitWidth = 16;
+
+    // for the score;
+    public TMP_Text scoreText;
 
     public GameObject mainMenu;
     bool ready = false;
@@ -16,7 +18,7 @@ public class LightDetection : MonoBehaviour
     public int width = 640;
     public int height = 360;
 
-    public float threshhold = 9E+07f;
+    public float threshhold = 0;
     public Material lightSky;
     public Material darkSky;
 
@@ -25,7 +27,7 @@ public class LightDetection : MonoBehaviour
 
     Color32[] pixels;
 
-    public WebCamTexture cam;
+    WebCamTexture cam;
     Texture2D tex;
 
     public GameObject battery;
@@ -114,12 +116,15 @@ public class LightDetection : MonoBehaviour
             if (total > threshhold) {
                 Debug.Log("the light is on: " + total);
                 RenderSettings.skybox = lightSky;
+                scoreText.color = Color.black;
+                
                 if (ready) {
                     battery.GetComponent<DrainBattery>().Drain(0.05f);
                 }
             } else {
                 Debug.Log("the light is off: " + total);
                 RenderSettings.skybox = darkSky;
+                scoreText.color = Color.white;
             }
 
             tex.SetPixels32(pixels);
