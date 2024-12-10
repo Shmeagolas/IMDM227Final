@@ -26,6 +26,7 @@ public class PlayerLook : MonoBehaviour
         rayCastMaxDistance = 1000f;
     int layerMask = 1 << 9;//blastable layer
     [SerializeField] private BlasterRecoil blaster;
+    [SerializeField] private float damage;
 
     // Laser vars
     [SerializeField] private Laser laser; 
@@ -107,15 +108,22 @@ public class PlayerLook : MonoBehaviour
 
     RaycastHit blasted;
 
-        if (Physics.Raycast(transform.position, transform.forward, out blasted, rayCastMaxDistance, layerMask))
+    if (Physics.Raycast(transform.position, transform.forward, out blasted, rayCastMaxDistance, layerMask))
     {
         Debug.Log($"Hit object: {blasted.collider.gameObject.name}");
 
-        // Draw the laser to the hit point
+        Shootable shootable = blasted.collider.gameObject.GetComponent<Shootable>();
+
+        if (shootable != null)
+        {
+            shootable.OnHit(damage);
+        }
+
         laser.DrawLaser(blasted.point, laserDuration);
     }
     else
     {
+        Debug.Log($"no hit");
         // If no hit, draw laser to maximum distance
         Vector3 laserEndPoint = transform.position + transform.forward * rayCastMaxDistance;
         laser.DrawLaser(laserEndPoint, laserDuration);

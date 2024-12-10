@@ -49,6 +49,7 @@ MonoBehaviour:
   inputClick: 0
   lookSensitivity: 0.4
   blaster: {fileID: 656900644950968382}
+  damage: 1
   laser: {fileID: 3397273344881203751}
   laserRenderer: {fileID: 6762449635710458471}
   laserStartPoint: {fileID: 7975435331786789826}
