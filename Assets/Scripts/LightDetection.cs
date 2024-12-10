@@ -64,37 +64,31 @@ public class LightDetection : MonoBehaviour
     }
 
     public void GetOn(){
-        if (cam.didUpdateThisFrame)
-        {
-            cam.GetPixels32(pixels);
+        cam.GetPixels32(pixels);
 
-            // get total amount of light and print
-            float total = 0;
-            foreach (Color32 c in pixels)
-            {
-                total += c.r;
-                total += c.b;
-                total += c.g;
-            }
-            On = total;
+        // get total amount of light and print
+        float total = 0;
+        foreach (Color32 c in pixels)
+        {
+            total += c.r;
+            total += c.b;
+            total += c.g;
         }
+        On = total;
     }
 
     public void GetOff(){
-        if (cam.didUpdateThisFrame)
-        {
-            cam.GetPixels32(pixels);
+        cam.GetPixels32(pixels);
 
-            // get total amount of light and print
-            float total = 0;
-            foreach (Color32 c in pixels)
-            {
-                total += c.r;
-                total += c.b;
-                total += c.g;
-            }
-            Off = total;
+        // get total amount of light and print
+        float total = 0;
+        foreach (Color32 c in pixels)
+        {
+            total += c.r;
+            total += c.b;
+            total += c.g;
         }
+        Off = total;
     }
 
     public void CalcThreshhold(){
