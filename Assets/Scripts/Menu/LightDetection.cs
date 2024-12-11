@@ -14,6 +14,7 @@ public class LightDetection : MonoBehaviour
     public GameObject mainMenu;
     bool ready = false;
 
+    private Spawner spawner;
 
     public int width = 640;
     public int height = 360;
@@ -98,6 +99,7 @@ public class LightDetection : MonoBehaviour
         Debug.Log("tHRESHHOD: " + threshhold);
         mainMenu.SetActive(false);
         ready = true;
+        spawner.enabled = true; //start enemy spawns
     }
     void CamIsOn()
     {
