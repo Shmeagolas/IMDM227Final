@@ -122,6 +122,12 @@ public class LightDetection : MonoBehaviour
             if (total > threshhold) {
                 Debug.Log("the light is on: " + total);
                 RenderSettings.skybox = lightSky;
+
+                // code should hard reset skybox to make sure eveything is reflecting right
+                RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
+                RenderSettings.defaultReflectionResolution = 128;
+                DynamicGI.UpdateEnvironment(); // Updates global illumination for skybox changes
+
                 scoreText.color = Color.black;
                 
                 if (ready) {
@@ -130,6 +136,12 @@ public class LightDetection : MonoBehaviour
             } else {
                 Debug.Log("the light is off: " + total);
                 RenderSettings.skybox = darkSky;
+
+                // code should hard reset skybox to make sure eveything is reflecting right
+                RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
+                RenderSettings.defaultReflectionResolution = 128;
+                DynamicGI.UpdateEnvironment(); // Updates global illumination for skybox changes
+                
                 scoreText.color = Color.white;
             }
 
