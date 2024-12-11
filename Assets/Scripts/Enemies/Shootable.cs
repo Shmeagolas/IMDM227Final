@@ -6,13 +6,16 @@ public class Shootable : MonoBehaviour
 {
     [SerializeField] private float health;
 
-    [SerializeField] private Color hitColor = Color.white, explodeColor = Color.yellow;
-    [SerializeField] private float flashDuration = 0.1f, growFactor = 1.2f, shrinkFactor = .9f;   // How long the flash lasts.
-    private int explodeFlashes = 10;
+    [SerializeField] private Color hitColor = Color.white, explodeColor = Color.yellow, dieColor = Color.red;
+    [SerializeField] private float flashDuration = 0.1f, growFactor = 1.2f, shrinkFactor = .9f, explodeDamage = 5f;   // How long the flash lasts.
+    [SerializeField] private int explodeFlashes = 10, scoreValue = 100;
 
     private MeshRenderer[] renderers; // Array to store all mesh renderers.
     private Color[] originalColors;   // Array to store original colors.
     private bool isFlashing = false;
+
+    private DrainBattery battery;
+    private ScoreCounter scoreCounter;
 
     //private Vector3 growFactor = new Vector3(1.2f, 1.2f, 1.2f), shrinkFactor = new Vector3(.9f, .9f, .9f);
     void Start()
@@ -26,6 +29,9 @@ public class Shootable : MonoBehaviour
         {
             originalColors[i] = renderers[i].material.color;
         }
+
+        battery = GameObject.Find("Battery").GetComponent<DrainBattery>();
+        scoreCounter = GameObject.Find("score").GetComponent<ScoreCounter>();
     }
 
     public void OnHit(float damage)
@@ -36,7 +42,8 @@ public class Shootable : MonoBehaviour
         {   
             GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezeAll;
             GetComponent<Approacher>().stopMoving();
-            StartCoroutine(Explode(hitColor, explodeColor, explodeFlashes, new Vector3(1f,1f,1f)));
+            StartCoroutine(Explode(hitColor, dieColor, explodeFlashes, new Vector3(1f,1f,1f)));
+            scoreCounter.AddScore(scoreValue);
             return;
         }
 
@@ -50,7 +57,6 @@ public class Shootable : MonoBehaviour
         GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezeAll;
         GetComponent<Approacher>().stopMoving();
         StartCoroutine(Explode(hitColor, explodeColor, explodeFlashes, new Vector3(1f,1f,1f)));
-        //deal battery damage
     }
 
     private IEnumerator Flash(Color color)
@@ -79,6 +85,10 @@ public class Shootable : MonoBehaviour
     {
         if (times <= 0)
         {
+            if(color2 == explodeColor || color1 == explodeColor)
+            {
+                battery.Drain(explodeDamage);
+            }
             Destroy(this.gameObject);
             yield break;
         }
