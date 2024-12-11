@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
         public GameObject enemy;    //the enemy object that will be spawned
         public Transform plane;     //the plane that the enemies will be spawned from
         // public float spawnDuration = 5f;    //how long the enemies will keep spawning (for testing purposes)
-        public float spawnInterval = 0.9f;  //how often enemies spawn
+        public float spawnInterval = 5f;  //how often enemies spawn
         public bool gameover = false;
 
         private float spawnTimer = 0f;  //tracks spawn interval
@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
         // Update is called once per frame
         void Update() {
             spawnDurationTimer += Time.deltaTime;   //counts time btwn spawns
-            spawnInterval -= 0.0000001f;
+            spawnInterval -= 0.00001f;
 
             //stops spawning when spawnDurationTimer is greater than or equal to spawnDuration
             // if (spawnDurationTimer >= spawnDuration) {

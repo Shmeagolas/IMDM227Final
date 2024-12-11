@@ -9,7 +9,7 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject slider;
 
-    private Spawner spawner;
+    public GameObject spawner;
 
     public GameObject battery;
     public GameObject score;
@@ -35,9 +35,7 @@ public class GameOver : MonoBehaviour
         score.GetComponent<ScoreCounter>().Reset(); // reset score
         gameOverUI.SetActive(false); // take away the Gameover UI
 
-
-        spawner.Reset();
-
+        spawner.GetComponent<Spawner>().Reset(); // reset battery
     }
 
     public void QuitGame() {

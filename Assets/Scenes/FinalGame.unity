@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311473, g: 0.3807381, b: 0.35873437, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311444, g: 0.38073748, b: 0.35873422, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6594,7 +6594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 100, y: -87}
   m_SizeDelta: {x: 124.58002, y: 71.26199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1946461203
@@ -6631,6 +6631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 1946461203}
   slider: {fileID: 1868838035}
+  spawner: {fileID: 723203248}
   battery: {fileID: 321483317}
   score: {fileID: 28402622}
 --- !u!114 &1946461205
