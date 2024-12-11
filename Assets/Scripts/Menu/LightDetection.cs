@@ -125,7 +125,7 @@ public class LightDetection : MonoBehaviour
                 total += c.g;
             }
             if (total > threshhold) { //light on
-                Debug.Log("the light is on: " + total);
+                // Debug.Log("the light is on: " + total);
                 RenderSettings.skybox = lightSky;
                 setObjectsDayorNight(true);
                 // code should hard reset skybox to make sure eveything is reflecting right
@@ -141,7 +141,7 @@ public class LightDetection : MonoBehaviour
                     battery.GetComponent<DrainBattery>().Drain(0.1f);
                 }
             } else { //light off    
-                Debug.Log("the light is off: " + total);
+                // Debug.Log("the light is off: " + total);
                 RenderSettings.skybox = darkSky;
                 setObjectsDayorNight(false);
 

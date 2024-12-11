@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 28402623}
+  finalScore: {fileID: 751345287}
 --- !u!1 &47779679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 422205240520717479, guid: 68b88e7147189884b807685e3745b275, type: 3}
@@ -2738,8 +2739,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6632,7 +6633,6 @@ MonoBehaviour:
   slider: {fileID: 1868838035}
   battery: {fileID: 321483317}
   score: {fileID: 28402622}
-  finalScore: {fileID: 0}
 --- !u!114 &1946461205
 MonoBehaviour:
   m_ObjectHideFlags: 0

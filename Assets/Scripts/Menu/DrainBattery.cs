@@ -29,7 +29,7 @@ public class DrainBattery : MonoBehaviour
     {
         currentCharge -= damage; // subtract damage
         currentCharge = Mathf.Clamp(currentCharge, 0, maxCharge); // clamp value between range
-        Debug.Log("battery is being drained");
+        // Debug.Log("battery is being drained");
         Update();
     }
 

@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
         {
             spawnTimer = 0f;
             GameObject[] allAliens = FindObjectsOfType<GameObject>();
-
+            Debug.Log("AYAWAWWWWWWWWWWWWWWWWWWWWWWWWW");
             foreach (GameObject obj in allAliens)
             {
                 if (obj.name == "AlienEnemy(Clone)")
