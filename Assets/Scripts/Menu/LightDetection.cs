@@ -119,10 +119,10 @@ public class LightDetection : MonoBehaviour
                 total += c.b;
                 total += c.g;
             }
-            if (total > threshhold) {
+            if (total > threshhold) { //light on
                 Debug.Log("the light is on: " + total);
                 RenderSettings.skybox = lightSky;
-
+                setObjectsDayorNight(true);
                 // code should hard reset skybox to make sure eveything is reflecting right
                 RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
                 RenderSettings.defaultReflectionResolution = 128;
@@ -133,9 +133,10 @@ public class LightDetection : MonoBehaviour
                 if (ready) {
                     battery.GetComponent<DrainBattery>().Drain(0.05f);
                 }
-            } else {
+            } else { //light off    
                 Debug.Log("the light is off: " + total);
                 RenderSettings.skybox = darkSky;
+                setObjectsDayorNight(false);
 
                 // code should hard reset skybox to make sure eveything is reflecting right
                 RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
@@ -147,6 +148,23 @@ public class LightDetection : MonoBehaviour
 
             tex.SetPixels32(pixels);
             tex.Apply();
+        }
+    }
+
+    private void setObjectsDayorNight(bool isDay)
+    {
+        NightModeable[] nightmodeableObjects = FindObjectsOfType<NightModeable>();
+        foreach (NightModeable script in nightmodeableObjects)
+        {  
+            if(isDay)
+            {
+                script.setDay();
+            }
+            else
+            {
+                script.setNight();
+            }
+            
         }
     }
 }
