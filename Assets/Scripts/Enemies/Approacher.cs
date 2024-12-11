@@ -16,7 +16,7 @@ public class Approacher : MonoBehaviour
    private Vector3 lastPosition;
    private float stuckTime = 0f;
    private float distanceToPlayer;
-
+    private bool updatePos = true;
    //timer vars
    private float nextDistanceCheckTime = -1f, checkDelay = .1f; //1 sec delay
 
@@ -34,7 +34,9 @@ public class Approacher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //small optimization so not calculating distance checks every frame
+        if(updatePos)
+        {
+            //small optimization so not calculating distance checks every frame
         if (Time.time >= nextDistanceCheckTime || nextDistanceCheckTime == -1f)
         {
             nextDistanceCheckTime = Time.time + checkDelay;
@@ -53,11 +55,9 @@ public class Approacher : MonoBehaviour
             else 
             {
             stuckTime = 0f;
-        }
+            }
         }
         
-   
-
         lastPosition = transform.position;
 
 
@@ -69,6 +69,8 @@ public class Approacher : MonoBehaviour
             //deal large amount of damage to trigger 
             GetComponent<Shootable>().Attack();
         }
+        }
+        
     }
 
 
@@ -89,5 +91,11 @@ public class Approacher : MonoBehaviour
         Vector3 targetPos = transform.position + moveDirection * 1f;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, approachSpeed * Time.deltaTime);
     }
+
+    public void stopMoving()
+    {
+        updatePos = false;
+    }
 }
+
 
