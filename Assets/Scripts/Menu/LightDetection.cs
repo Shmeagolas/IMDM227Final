@@ -26,6 +26,11 @@ public class LightDetection : MonoBehaviour
     public float On = 0;
     public float Off = 0;
 
+    // code to change posters
+    public GameObject posters; // Assign the cube in the Inspector
+    public Material posterOn; // Assign the first material in the Inspector
+    public Material posterOff; // Assign the second material in the Inspector
+
     Color32[] pixels;
 
     WebCamTexture cam;
@@ -129,9 +134,11 @@ public class LightDetection : MonoBehaviour
                 DynamicGI.UpdateEnvironment(); // Updates global illumination for skybox changes
 
                 scoreText.color = Color.black;
+                // change the poster material
+                posters.GetComponent<Renderer>().material = posterOn;
                 
                 if (ready) {
-                    battery.GetComponent<DrainBattery>().Drain(0.05f);
+                    battery.GetComponent<DrainBattery>().Drain(0.1f);
                 }
             } else { //light off    
                 Debug.Log("the light is off: " + total);
@@ -142,8 +149,10 @@ public class LightDetection : MonoBehaviour
                 RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
                 RenderSettings.defaultReflectionResolution = 128;
                 DynamicGI.UpdateEnvironment(); // Updates global illumination for skybox changes
-                
+
                 scoreText.color = Color.white;
+                // change the poster material
+                posters.GetComponent<Renderer>().material = posterOff;
             }
 
             tex.SetPixels32(pixels);
