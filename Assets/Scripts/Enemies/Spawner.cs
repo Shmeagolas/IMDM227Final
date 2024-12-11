@@ -41,19 +41,30 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        // this method just finds a random point on the spawn plane
+        //returns new random location for alien to move to
         private Vector3 getRandomPointOnPlane() {
-            //accesses renderer component of plane
             Renderer planeRender = plane.GetComponent<Renderer>();
             Bounds bounds = planeRender.bounds;
 
-            //randomly get x and z coordinates
+
             float xPos = Random.Range(bounds.min.x, bounds.max.x);
             float zPos = Random.Range(bounds.min.z, bounds.max.z);
-
-            //y coordinate is just on top of the plane
             float yPos = plane.position.y + 0.25f;
 
             return new Vector3(xPos, yPos, zPos);
+        }
+
+        public void Reset()
+        {
+            spawnTimer = 0f;
+            GameObject[] allAliens = FindObjectsOfType<GameObject>();
+
+            foreach (GameObject obj in allAliens)
+            {
+                if (obj.name == "AlienEnemy(Clone)")
+                {
+                    Destroy(obj);
+                }
+            }
         }
 }

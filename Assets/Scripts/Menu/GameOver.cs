@@ -36,6 +36,10 @@ public class GameOver : MonoBehaviour
         // spawner.enabled = true; // stop enemy spawns
         score.GetComponent<ScoreCounter>().Reset(); // reset score
         gameOverUI.SetActive(false); // take away the Gameover UI
+
+
+        spawner.Reset();
+
     }
 
     public void QuitGame() {
