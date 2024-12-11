@@ -42,6 +42,7 @@ public class LightDetection : MonoBehaviour
         cam.Play();
         int w = cam.width;
         Debug.Log($"Width = {width}, Height = {height}");
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
     }
     private void Update()
     {
@@ -98,7 +99,7 @@ public class LightDetection : MonoBehaviour
         threshhold = (On + Off) / 2;
         Debug.Log("tHRESHHOD: " + threshhold);
         mainMenu.SetActive(false);
-        ready = true;
+        ready = true;    
         spawner.enabled = true; //start enemy spawns
     }
     void CamIsOn()
