@@ -101,6 +101,8 @@ public class LightDetection : MonoBehaviour
         mainMenu.SetActive(false);
         ready = true;    
         spawner.enabled = true; //start enemy spawns
+        // make mouse invisible
+        Cursor.visible = false;
     }
     void CamIsOn()
     {

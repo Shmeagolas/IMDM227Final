@@ -52,6 +52,8 @@ public class DrainBattery : MonoBehaviour
         } else {
             Debug.Log("gameover");
             dead = false;
+            // make mouse visible
+            Cursor.visible = true;
             gameOverUI.GetComponent<GameOver>().ShowGameOver();
             
             // Debug.Log("GAME OVER: battery is dead");

@@ -51,9 +51,6 @@ public class PlayerLook : MonoBehaviour
 
         headRotation = this.transform.localRotation.eulerAngles;
 
-        // make mouse invisible
-        Cursor.visible = false;
-
         if(lookSensitivity != 0)
         {
             lookXSensitivity = lookSensitivity;
