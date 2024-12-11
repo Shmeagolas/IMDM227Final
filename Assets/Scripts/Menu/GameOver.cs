@@ -13,7 +13,6 @@ public class GameOver : MonoBehaviour
 
     public GameObject battery;
     public GameObject score;
-    public TMP_Text finalScore;
 
     void Start(){
         gameOverUI.SetActive(false);
@@ -24,9 +23,8 @@ public class GameOver : MonoBehaviour
         //spawner.enabled = false;
         gameOverUI.SetActive(true);
         slider.SetActive(false);
-        int endScore = score.GetComponent<ScoreCounter>().finalScore;
-        Debug.Log(endScore);
-        finalScore.text = "Final Score: " + endScore;
+        // set final score
+        score.GetComponent<ScoreCounter>().SetFinalScore(); // final score
     }
 
     public void RestartGame() {
