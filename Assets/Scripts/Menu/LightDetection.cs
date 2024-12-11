@@ -99,6 +99,7 @@ public class LightDetection : MonoBehaviour
         threshhold = (On + Off) / 2;
         Debug.Log("tHRESHHOD: " + threshhold);
         mainMenu.SetActive(false);
+        // set the battery to be ready to be drained
         ready = true;    
         spawner.enabled = true; //start enemy spawns
         // make mouse invisible
