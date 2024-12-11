@@ -7,37 +7,67 @@ public class Approacher : MonoBehaviour
    //[SerializeField] public GameObject player;
    public float approachSpeed;
    private float stuckDuration = 3f;
-   private float playerRing = 2f;
+   private float playerRing = 4f;
    private float positionRange = 0.01f;
 
    //manually setting player position
-   private Vector3 playerPosition = new Vector3(0, 1, -10);
+   private string playerName = "playerPrefab";
+   private Vector3 playerPosition;
    private Vector3 lastPosition;
    private float stuckTime = 0f;
+   private float distanceToPlayer;
 
+   //timer vars
+   private float nextDistanceCheckTime = -1f, checkDelay = .1f; //1 sec delay
 
+    
+    void Start()
+    {
+        playerPosition  = GameObject.Find(playerName).transform.position;
+
+        if (playerName == null)
+        {
+            Debug.LogError($"Object {playerName} not found in the scene.");
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
+        //small optimization so not calculating distance checks every frame
+        if (Time.time >= nextDistanceCheckTime || nextDistanceCheckTime == -1f)
+        {
+            nextDistanceCheckTime = Time.time + checkDelay;
+            distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
 
-        if (Vector3.Distance(transform.position, lastPosition) < positionRange) {
-            stuckTime += Time.deltaTime;
+             if (Vector3.Distance(transform.position, lastPosition) < positionRange) 
+             {
+                stuckTime += Time.deltaTime;
 
-            if (stuckTime >= stuckDuration && distanceToPlayer > playerRing) {
-                getUnstuck();
-                stuckTime = 0f;
-            }
-        } else {
+                if (stuckTime >= stuckDuration && distanceToPlayer > playerRing) 
+                {
+                    getUnstuck();
+                    stuckTime = 0f;
+                }
+            } 
+            else 
+            {
             stuckTime = 0f;
         }
+        }
+        
+   
 
         lastPosition = transform.position;
 
- 
+
         if (distanceToPlayer > playerRing) {
             transform.position = Vector3.MoveTowards(transform.position, playerPosition, approachSpeed * Time.deltaTime);
+        }
+        else
+        {
+            //deal large amount of damage to trigger 
+            GetComponent<Shootable>().Attack();
         }
     }
 
