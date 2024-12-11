@@ -8,7 +8,7 @@ public class Shootable : MonoBehaviour
 
     [SerializeField] private Color hitColor = Color.white, explodeColor = Color.yellow, dieColor = Color.red;
     [SerializeField] private float flashDuration = 0.1f, growFactor = 1.2f, shrinkFactor = .9f, explodeDamage = 5f;   // How long the flash lasts.
-    [SerializeField] private int explodeFlashes = 10, scoreValue = 100;
+    [SerializeField] private int explodeFlashes = 10, dieFlashes = 4, scoreValue = 100;
 
     private MeshRenderer[] renderers; // Array to store all mesh renderers.
     private Color[] originalColors;   // Array to store original colors.
@@ -42,7 +42,7 @@ public class Shootable : MonoBehaviour
         {   
             GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezeAll;
             GetComponent<Approacher>().stopMoving();
-            StartCoroutine(Explode(hitColor, dieColor, explodeFlashes, new Vector3(1f,1f,1f)));
+            StartCoroutine(Explode(hitColor, dieColor, dieFlashes, new Vector3(1f,1f,1f)));
             scoreCounter.AddScore(scoreValue);
             return;
         }
@@ -83,6 +83,7 @@ public class Shootable : MonoBehaviour
 
  private IEnumerator Explode(Color color1, Color color2, int times, Vector3 targetScale)
     {
+        isFlashing = true;
         if (times <= 0)
         {
             if(color2 == explodeColor || color1 == explodeColor)
