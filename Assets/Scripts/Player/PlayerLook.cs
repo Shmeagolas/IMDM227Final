@@ -35,6 +35,10 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private Transform laserStartPoint;
     private float laserDuration = 0.1f; 
 
+    //audio vars
+    [SerializeField] private AudioClip laserSFX;
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -101,7 +105,8 @@ public class PlayerLook : MonoBehaviour
     {
         return;
     }
-
+    
+    audioSource.PlayOneShot(laserSFX);
     // reset fire cooldown 
     nextFireTime = Time.time + firingDelay;
 
