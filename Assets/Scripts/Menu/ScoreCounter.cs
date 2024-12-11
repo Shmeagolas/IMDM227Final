@@ -14,6 +14,14 @@ public class ScoreCounter : MonoBehaviour
         Update();
     }
 
+    public void Reset()
+    {
+        Debug.Log("score was reset");
+        scoreText.text = "Score: 0";
+        score = 0;
+        Update();
+    }
+
     // Update is called once per frame
     void Update()
     {
