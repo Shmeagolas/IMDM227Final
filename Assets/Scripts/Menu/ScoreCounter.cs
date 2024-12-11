@@ -7,6 +7,7 @@ public class ScoreCounter : MonoBehaviour
 {
     public TMP_Text scoreText;
     private int score = 0;
+    public int finalScore { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class ScoreCounter : MonoBehaviour
     public void Reset()
     {
         Debug.Log("score was reset");
-        scoreText.text = "Score: 0";
+        scoreText.text = "Score: " + 0;
         score = 0;
         Update();
     }
@@ -34,4 +35,10 @@ public class ScoreCounter : MonoBehaviour
         score += points; // Increase the score
         Update(); // Refresh the UI
     }
+
+    public int FinalScore
+    {
+        get { return finalScore; }
+        set { finalScore = score; }
+    }          
 }
