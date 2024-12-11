@@ -17,13 +17,16 @@ public class Approacher : MonoBehaviour
    private float stuckTime = 0f;
    private float distanceToPlayer;
     private bool updatePos = true;
+    private Transform playerTransform;
    //timer vars
    private float nextDistanceCheckTime = -1f, checkDelay = .1f; //1 sec delay
 
     
     void Start()
-    {
-        playerPosition  = GameObject.Find(playerName).transform.position;
+    {   
+        Transform playerTransform = GameObject.Find(playerName).transform;
+        playerPosition  = playerTransform.position;
+        
 
         if (playerName == null)
         {
@@ -39,6 +42,7 @@ public class Approacher : MonoBehaviour
             //small optimization so not calculating distance checks every frame
         if (Time.time >= nextDistanceCheckTime || nextDistanceCheckTime == -1f)
         {
+        
             nextDistanceCheckTime = Time.time + checkDelay;
             distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
 
@@ -56,6 +60,8 @@ public class Approacher : MonoBehaviour
             {
             stuckTime = 0f;
             }
+
+            transform.LookAt(playerTransform);
         }
         
         lastPosition = transform.position;
